@@ -15,35 +15,37 @@ docker inspect <tag or id>
 ```
 ### Docker-compose
 ```bash
-docker compose up
-docker compose down
+docker compose up -d			// -d == detach mode
+docker compose stop				// stop services
+docker compose down				// bring everything down --volumes option to remove volumes
 docker compose ps
 ```
 
 ## General
-[ ] use ENV VAR
-[ ] file .env with all env var inside (in ./srcs/) (optional)
-[ ] use docker-network to link containers
-[ ] restart crashed containers
+[x] use ENV VAR
+[X] file .env with all env var inside (in ./srcs/) (optional)
+[x] use docker-network to link containers
+[x] restart crashed containers
 
 ## NGINX
-[ ] ! only starting point is Nginx on port 443
+[x] ! only starting point is Nginx on port 443
 [ ] use protocole TLSv1.2 or TLSv1.3
 [ ] ggilbert.42.fr must return localhost website
 
 ## Wordpress + php-fpm
-[ ] use port 9000 with NGINX
-[ ] use port 3306 with MariaDB
+[x] use port 9000 with NGINX
+[x] use port 3306 with MariaDB
+[x] 2 users, one is admin and don't have "Admin" or "admin" in his name
 
 ## MariaDB
 [ ] use port 3306 (share with wordpress, not NGINX)
-[ ] 2 users, one is admin and don't have "Admin" or "admin" in his name
 
 ## Volumes
-[ ] volumes must be in /home/ggilbert/data
+[x] volumes must be in /home/ggilbert/data
 ### Wordpress BDD
-
+[x] in /home/ggilbert/data/mysql
 ### Wordpress files
+[x] in /home/ggilbert/data/html
 
 
 ## SEARCH
