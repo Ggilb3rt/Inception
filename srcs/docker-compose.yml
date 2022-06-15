@@ -19,7 +19,7 @@ services:
 		image: wordpress
 		container_name: wordpress
 		volume:
-			- wordpress:${WP_PATH}
+			- wordpress_vol:${WP_PATH}
 		restart: on-failure
 		depends_on:
 			- mariadb
@@ -30,7 +30,7 @@ services:
 		image: mariadb
 		container_name: mariadb
 		volume:
-			- mariadb:${MYSQL_PATH}
+			- mariadb_vol:${MYSQL_PATH}
 		restart: on-failure
 		# env_file: .env
 
@@ -39,12 +39,12 @@ network:
 		driver: bridge
 
 volumes:
-	wordpress:
+	wordpress_vol:
 		driver_opts:
 			type: none
 			device: /home/ggilbert/data/html
 			o: bind
-	mariadb:
+	mariadb_vol:
 		driver_opts:
 			type: none
 			device: /home/ggilbert/data/mysql

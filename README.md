@@ -9,9 +9,10 @@ docker run -it image	        // start container in interactive mode
 docker ps		                // print stated containers
 docker rm id/name	            // stop container
 
-docker run -p 80:80 img	        // start container and map port 80 from container to port 80 of computer
+docker run -p 8080:80 img	        // start container and map port 80 from container to port 8080 of computer
 docker image ls                 // list local images
 docker inspect <tag or id>
+docker exec -ti <container id> bash // start bash in the container 
 ```
 ### Docker-compose
 ```bash
@@ -19,6 +20,7 @@ docker compose up -d			// -d == detach mode
 docker compose stop				// stop services
 docker compose down				// bring everything down --volumes option to remove volumes
 docker compose ps
+docker compose prune			// remove all unsued volumes
 ```
 
 ## General
@@ -52,3 +54,6 @@ docker compose ps
 ### What are Daemons and how they works ?
 
 ### Why PID 1 in docker is important ?
+
+### php-fpm
+PHP FastCGI Process Manager. The server (Nginx here) pass all valid requests to php-fpm. Php-fpm do the stuff with interpretation and database and send the reponse to the server who send it to the client.
