@@ -5,15 +5,15 @@ printf "server {
 		listen 443 ssl;
 		listen [::]:443 ssl;
 
-		ssl_certificate ${CERT_SELF};
-		ssl_certificate_key ${CERT_KEY};
+		ssl_certificate ${CERTS_SELF};
+		ssl_certificate_key ${CERTS_KEY};
 
 		server_name ${DOMAINE_NAME};
 		root ${WP_PATH};
 		index index.php index.html index.htm;
  
 		location / {
-			try_files $uri $uri/ /index.php?$args;
+			try_files \$uri \$uri/ /index.php?\$args;
 		}
 		
 		location ~ \.php$ {
@@ -29,6 +29,9 @@ printf "server {
 		}
 }
 " > /etc/nginx/sites-available/default
+
+
+cat /etc/nginx/sites-available/default
 
 #--------------------#
 # Initialise Nginx   #

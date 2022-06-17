@@ -2,6 +2,7 @@ FROM debian:buster
 
 # Updates and install #
 RUN apt-get update && apt-get install -y \
+	curl \
 	mariadb-client \
 	php \ 
 	php-cli \ 

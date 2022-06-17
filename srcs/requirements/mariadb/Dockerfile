@@ -4,12 +4,22 @@ FROM debian:buster
 RUN apt-get update && apt-get install -y \
 	mariadb-client \
 	mariadb-server \
+    && mkdir -p /var/run/mysqld \
+    && chown -R mysql:mysql /var/run/mysqld \
+    && chown -R mysql:mysql /etc/mysql \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Adding the sources #
 COPY tool/config_mariadb.sh /config_mariadb.sh
+COPY conf/init.sql /tmp/init.sql
+COPY conf/my.cnf /etc/mysql
 
-EXPOSE 3306
+RUN chown -R mysql:mysql /etc/mysql \
+	&& chown mysql:mysql /tmp/
 
-ENTRYPOINT ["/bin/bash", "/config_mariadb.sh"]
+
+# EXPOSE 3306
+USER mysql
+
+ENTRYPOINT ["sh", "/config_mariadb.sh"]

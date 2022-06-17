@@ -1,20 +1,28 @@
 #!/bin/sh
 
-#--------------------#
-# Initialise MariaDb #
-#--------------------#
-service mysql start
 
-MARIA_DB_NAME="mybdd"
-MARIA_DB_ROOT_PASS="qwerty"
-BDD_USER_NAME="ggilbert"
-BDD_USER_PASS="123"
 
-# Secure
-#mysql -e "SET PASSWORD FOR root@localhost = PASSWORD('$MARIA_DB_ROOT_PASS');"
-#mysql -e "DELETE FROM mysql.user WHERE User='';"
-#mysql -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
+sed -i 's|MYSQL_DATABASE|'${MYSQL_DATABASE}'|g' /tmp/init.sql
+sed -i 's|MYSQL_USER|'${MYSQL_USER}'|g' /tmp/init.sql
+sed -i 's|MYSQL_PASSWORD|'${MYSQL_PASSWORD}'|g' /tmp/init.sql
+sed -i 's|MYSQL_ROOT_PASSWORD|'${MYSQL_ROOT_PASSWORD}'|g' /tmp/init.sql
+sed -i 's|MYSQL_PORT|'${MYSQL_PORT}'|g' /etc/mysql/my.cnf
+sed -i 's|MYSQL_ADDRESS|'${MYSQL_ADDRESS}'|g' /etc/mysql/my.cnf
 
-# Create bdd and user
-mysql -e "CREATE DATABASE $MARIA_DB_NAME;"
-mysql -e "GRANT ALL ON *.* TO '$BDD_USER_NAME'@'localhost' IDENTIFIED BY '123';FLUSH PRIVILEGES;"
+
+if [ -d "/var/lib/mysql/${MYSQL_DATABASE}" ]
+then
+    echo "Database exist"
+    mysqld_safe
+else
+    mysql_install_db
+    mysqld --init-file="/tmp/init.sql"
+
+    # mysql -e "CREATE DATABASE ${MYSQL_DATABASE};"
+    # mysql -e "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
+    # mysql -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%' IDENTIFIED BY 'MYSQL_PASSWORD';"
+    # mysql -e "FLUSH PRIVILEGES;"
+    # mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
+fi
+
+exec "$@"

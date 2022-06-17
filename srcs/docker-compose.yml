@@ -3,37 +3,36 @@ services:
     mariadb:
         build: requirements/mariadb
         image: mariadb
-        container_name: mariadb
-        volume:
+        container_name: MyMariadb
+        volumes:
             - mariadb_vol:${MYSQL_PATH}
         restart: on-failure
-        # env_file: .env
-    nginx:
-        build: requirements/nginx
-        image: nginx
-        container_name: nginx
-        volume:
-            - wordpress:${WP_PATH}
-        restart: on-failure
-        depends_on:
-            - wordpress
-        ports:
-            - 443:443	# HOST_PORT:CONTAINER_PORT, use HOST_PORT outside of docker network and CONTAINER_PORT inside
-        #use network to specifie your own network and don't use default one
-        # env_file: .env	#can use specific env file for this container {.env is use by default}
-
+        env_file: .env
     wordpress:
         build: requirements/wordpress
         image: wordpress
-        container_name: wordpress
-        volume:
-            - wordpress_vol:${WP_PATH}
-        restart: on-failure
         depends_on:
             - mariadb
-        # env_file: .env
+        container_name: MyWordpress
+        volumes:
+            - wordpress_vol:${WP_PATH}
+        restart: on-failure
+        env_file: .env
+    nginx:
+        build: requirements/nginx
+        image: nginx
+        depends_on:
+            - wordpress
+        container_name: MyNginx
+        volumes:
+            - wordpress_vol:${WP_PATH}
+        restart: on-failure
+        ports:
+            - 443:443	# HOST_PORT:CONTAINER_PORT, use HOST_PORT outside of docker network and CONTAINER_PORT inside
+        #use network to specifie your own network and don't use default one
+        env_file: .env	#can use specific env file for this container {.env is use by default}
 
-network:
+networks:
     default:
         driver: bridge
 
