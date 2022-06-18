@@ -4,7 +4,7 @@
 # Initialise Wordpress #
 #----------------------#
 
-if [ -f "${WP_PATH}/wp-config.php" ]
+if [ -e "${WP_PATH}/wp-config.php" ]
 then
     echo "Wordpress is already set"
 else
@@ -19,5 +19,3 @@ fi
 
 
 service php7.3-fpm start
-
-

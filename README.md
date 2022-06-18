@@ -24,30 +24,30 @@ docker compose prune			// remove all unsued volumes
 ```
 
 ## General
-[x] use ENV VAR
-[X] file .env with all env var inside (in ./srcs/) (optional)
-[x] use docker-network to link containers
-[x] restart crashed containers
+- [x] use ENV VAR
+- [x] file .env with all env var inside (in ./srcs/) (optional)
+- [x] use docker-network to link containers
+- [x] restart crashed containers
 
 ## NGINX
-[x] ! only starting point is Nginx on port 443
-[ ] use protocole TLSv1.2 or TLSv1.3
-[ ] ggilbert.42.fr must return localhost website
+- [x] ! only starting point is Nginx on port 443
+- [ ] use protocole TLSv1.2 or TLSv1.3
+- [ ] ggilbert.42.fr must return localhost website
 
 ## Wordpress + php-fpm
-[x] use port 9000 with NGINX
-[x] use port 3306 with MariaDB
-[x] 2 users, one is admin and don't have "Admin" or "admin" in his name
+- [x] use port 9000 with NGINX
+- [x] use port 3306 with MariaDB
+- [x] 2 users, one is admin and don't have "Admin" or "admin" in his name
 
 ## MariaDB
-[ ] use port 3306 (share with wordpress, not NGINX)
+- [ ] use port 3306 (share with wordpress, not NGINX)
 
 ## Volumes
-[x] volumes must be in /home/ggilbert/data
+- [x] volumes must be in /home/ggilbert/data
 ### Wordpress BDD
-[x] in /home/ggilbert/data/mysql
+- [x] in /home/ggilbert/data/mysql
 ### Wordpress files
-[x] in /home/ggilbert/data/html
+- [x] in /home/ggilbert/data/html
 
 
 ## SEARCH

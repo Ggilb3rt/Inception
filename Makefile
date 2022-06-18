@@ -1,4 +1,4 @@
-.PHONY: all create_vol up ps down build images
+.PHONY: all create_vol up ps down build images remove logs logs_wordpress logs_mariadb logs_nginx
 
 
 all: create_vol build up
@@ -10,26 +10,34 @@ create_vol:
 	sudo chmod -R 777 $(HOME)/data
 
 build:
-	sudo docker compose -f ./srcs/docker-compose.yml build 
+	docker compose -f ./srcs/docker-compose.yml build 
 
 up:
-	sudo docker compose -f ./srcs/docker-compose.yml up -d
+	docker compose -f ./srcs/docker-compose.yml up -d
 
 down:
-	sudo docker compose -f ./srcs/docker-compose.yml down
+	docker compose -f ./srcs/docker-compose.yml down
 
 ps:
-	sudo docker ps -a
+	docker ps -a
 
 images:
-	sudo docker images -a
+	docker images -a
 
 # remove:
 
 go_nginx:
-	sudo docker exec -ti MyNginx bash
+	docker exec -ti MyNginx bash
+go_mariadb:
+	docker exec -ti MyMariadb bash
+go_wordpress:
+	docker exec -ti MyWordpress bash
 
 logs:
-	cd srcs && sudo docker compose logs mariadb wordpress nginx
+	cd srcs && docker compose logs mariadb wordpress nginx
 logs_wordpress:
-	cd srcs && sudo docker compose logs wordpress
+	cd srcs && docker compose logs wordpress
+logs_mariadb:
+	cd srcs && docker compose logs mariadb
+logs_nginx:
+	cd srcs && docker compose logs nginx
