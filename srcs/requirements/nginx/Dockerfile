@@ -5,6 +5,10 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	nginx \
 	openssl \
+    && mkdir -p /etc/nginx/ssl \
+    && mkdir -p /run/nginx \
+    && chown -R www-data /var/lib/nginx \
+    && rm -rf /etc/nginx/sites-available/default \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 	&& echo "daemon off;" >> /etc/nginx/nginx.conf

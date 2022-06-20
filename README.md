@@ -41,6 +41,7 @@ docker compose prune			// remove all unsued volumes
 
 ## MariaDB
 - [ ] use port 3306 (share with wordpress, not NGINX)
+- [ ] remove root access
 
 ## Volumes
 - [x] volumes must be in /home/ggilbert/data
@@ -57,3 +58,7 @@ docker compose prune			// remove all unsued volumes
 
 ### php-fpm
 PHP FastCGI Process Manager. The server (Nginx here) pass all valid requests to php-fpm. Php-fpm do the stuff with interpretation and database and send the reponse to the server who send it to the client.
+
+### mysql
+
+mysql -u user -p    // can do -ppassword

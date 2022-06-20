@@ -1,5 +1,8 @@
 #!/bin/sh
 
+
+sed -i 's|PHP_PORT|'${PHP_PORT}'|g' /etc/php/7.3/fpm/pool.d/www.conf
+
 #----------------------#
 # Initialise Wordpress #
 #----------------------#
@@ -18,4 +21,5 @@ else
 fi
 
 
-service php7.3-fpm start
+# service php7.3-fpm start
+/usr/sbin/php-fpm7.3 -F

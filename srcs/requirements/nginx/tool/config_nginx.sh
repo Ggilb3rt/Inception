@@ -31,7 +31,11 @@ printf "server {
 " > /etc/nginx/sites-available/default
 
 
-cat /etc/nginx/sites-available/default
+# cat /etc/nginx/sites-available/default
+
+
+mkdir -p $WP_PATH
+chown -R www-data $WP_PATH
 
 #--------------------#
 # Initialise Nginx   #
@@ -54,5 +58,5 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ${CERTS_KEY} -out ${
 	-subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O='$ORGA'/OU='$ORGAUNIT'/CN='$COMMON_NAME'/emailAddress='$EMAIL'"
 
 service nginx start
-
+# nginx -g "daemon off;"
 

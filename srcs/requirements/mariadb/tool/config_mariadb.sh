@@ -25,4 +25,7 @@ else
     # mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
 fi
 
-exec "$@"
+mysqld
+# service mysql start
+# exec "$@"
+# systemctl start mariadb.service
