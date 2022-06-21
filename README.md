@@ -57,3 +57,17 @@ docker compose prune			// remove all unsued volumes
 
 ### php-fpm
 PHP FastCGI Process Manager. The server (Nginx here) pass all valid requests to php-fpm. Php-fpm do the stuff with interpretation and database and send the reponse to the server who send it to the client.
+
+### MariaDb cmds
+Connection to mariaDb
+```bash
+mysql -u //user_name// -p -h //ip_address// //db_name//
+```
+
+```mysql
+SHOW DATABASES;
+SHOW TABLES;
+DESCRIBE table_name;
+SELECT colon_x FROM table_name;
+SELECT * FROM table_name WHERE author_id = 234 LIMIT 5;
+```
