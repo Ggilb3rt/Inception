@@ -17,20 +17,45 @@ printf "server {
 		}
 		
 		location ~ \.php$ {
-			include snippets/fastcgi-php.conf;
-			fastcgi_pass unix:/run/php/php7.3-fpm.sock;
-			fastcgi_intercept_errors on;
-			include fastcgi_params;
+			#fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+			#if (!-f \$document_root\$fastcgi_script_name) {
+    		#    return 404;
+    		#}
+			# Mitigate https://httpoxy.org/ vulnerabilities
+    		#fastcgi_param HTTP_PROXY "";
+
+		    #fastcgi_pass ${PHP_HOST}:${PHP_PORT};
+		    #fastcgi_index index.php;
+			#fastcgi_intercept_errors on;
+		
+		    # include the fastcgi_param setting
+			#include fastcgi_params;
+			
+			# include snippets/fastcgi-php.conf;
+			# fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+		
+		
+			try_files \$uri =404;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass ${PHP_HOST}:${PHP_PORT};
+            fastcgi_index index.php;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+            fastcgi_param PATH_INFO \$fastcgi_path_info;
+		
+		
+		
+		
 		}
 
-		location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
-			expires max;
-			log_not_found off;
-		}
+		#location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+		#	expires max;
+		#	log_not_found off;
+		#}
 }
 " > /etc/nginx/sites-available/default
 
-
+sed -i 's|ssl_protocols TLSv1 TLSv1.1 TLSv1.2;|ssl_protocols TLSv1.2 TLSv1.3;|g' /etc/nginx/nginx.conf
 # cat /etc/nginx/sites-available/default
 
 

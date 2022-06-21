@@ -8,6 +8,9 @@ services:
             - mariadb_vol:${MYSQL_PATH}
         restart: on-failure
         env_file: .env
+        networks:
+            - inception
+
     wordpress:
         build: requirements/wordpress
         image: wordpress
@@ -18,6 +21,9 @@ services:
             - wordpress_vol:${WP_PATH}
         restart: on-failure
         env_file: .env
+        networks:
+            - inception
+
     nginx:
         build: requirements/nginx
         image: nginx
@@ -31,9 +37,11 @@ services:
             - 443:443	# HOST_PORT:CONTAINER_PORT, use HOST_PORT outside of docker network and CONTAINER_PORT inside
         #use network to specifie your own network and don't use default one
         env_file: .env	#can use specific env file for this container {.env is use by default}
+        networks:
+            - inception
 
 networks:
-    default:
+    inception:
         driver: bridge
 
 volumes:
