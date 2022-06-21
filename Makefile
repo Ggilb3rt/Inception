@@ -7,7 +7,7 @@ re: clean all
 
 # Create
 hosts:
-	sed -i 's|localhost|'$(DOMAINE_NAME)'|g'
+	sudo sed -i 's|localhost|ggilbert.42.fr|g' /etc/hosts
 
 create_vol:
 	mkdir -p $(HOME)/data/html
@@ -33,19 +33,26 @@ images:
 
 # Remove
 rm_volumes:
-	sudo chown -R $(USER) $(HOME)/data
-	sudo chmod -R 777 $(HOME)/data
-	rm -rf $(HOME)/data
-	docker volume rm srcs_wordpress
-	docker volume rm srcs_mariadb
-	docker volume prune -f
+	if [ -d "$(HOME)/data" ]; then \
+		sudo chown -R $(USER) $(HOME)/data \
+		&& sudo chmod -R 777 $(HOME)/data \
+		&& rm -rf $(HOME)/data; \
+	fi
+	-docker volume rm srcs_wordpress_vol
+	-docker volume rm srcs_mariadb_vol
+	-docker volume prune -f
 
 remove: down
-	docker images prune -f
+	docker images prune
 	docker container prune -f
 	docker system prune -f 
 
 clean: remove rm_volumes
+
+fclean: clean
+	-docker image rm wordpress
+	-docker image rm mariadb
+	-docker image rm nginx
 
 # Debug
 go_nginx:

@@ -35,7 +35,6 @@ services:
         restart: on-failure
         ports:
             - 443:443	# HOST_PORT:CONTAINER_PORT, use HOST_PORT outside of docker network and CONTAINER_PORT inside
-        #use network to specifie your own network and don't use default one
         env_file: .env	#can use specific env file for this container {.env is use by default}
         networks:
             - inception

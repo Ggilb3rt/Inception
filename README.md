@@ -31,8 +31,8 @@ docker compose prune			// remove all unsued volumes
 
 ## NGINX
 - [x] ! only starting point is Nginx on port 443
-- [ ] use protocole TLSv1.2 or TLSv1.3
-- [ ] ggilbert.42.fr must return localhost website
+- [x] use protocole TLSv1.2 or TLSv1.3
+- [x] ggilbert.42.fr must return localhost website
 
 ## Wordpress + php-fpm
 - [x] use port 9000 with NGINX
@@ -40,8 +40,8 @@ docker compose prune			// remove all unsued volumes
 - [x] 2 users, one is admin and don't have "Admin" or "admin" in his name
 
 ## MariaDB
-- [ ] use port 3306 (share with wordpress, not NGINX)
-- [ ] remove root access
+- [x] use port 3306 (share with wordpress, not NGINX)
+- [x] remove root access without password
 
 ## Volumes
 - [x] volumes must be in /home/ggilbert/data
@@ -61,14 +61,15 @@ PHP FastCGI Process Manager. The server (Nginx here) pass all valid requests to 
 
 ### MariaDb cmds
 Connection to mariaDb
-```bash
+```bash 
 mysql -u //user_name// -p -h //ip_address// //db_name//
 ```
 
 ```mysql
 SHOW DATABASES;
+USE xxx
 SHOW TABLES;
 DESCRIBE table_name;
-SELECT colon_x FROM table_name;
+SELECT colon_x, colon_y FROM table_name;
 SELECT * FROM table_name WHERE author_id = 234 LIMIT 5;
 ```
