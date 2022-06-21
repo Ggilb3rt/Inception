@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
 	php7.3-gd \
 	php7.3-mbstring \ 
 	&& rm -rf /etc/php/7.3/fpm/pool.d/www.conf \
+	&& mkdir -p run/php \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

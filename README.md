@@ -41,6 +41,7 @@ docker compose prune			// remove all unsued volumes
 
 ## MariaDB
 - [ ] use port 3306 (share with wordpress, not NGINX)
+- [ ] remove root access
 
 ## Volumes
 - [x] volumes must be in /home/ggilbert/data
