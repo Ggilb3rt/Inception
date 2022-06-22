@@ -5,8 +5,11 @@ RUN apt-get update && apt-get install -y \
 	mariadb-client \
 	mariadb-server \
     && mkdir -p /var/run/mysqld \
+    && mkdir -p /etc/mysql \
+    && mkdir -p /tmp \
     && chown -R mysql:mysql /var/run/mysqld \
     && chown -R mysql:mysql /etc/mysql \
+	&& chown mysql:mysql /tmp \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -15,8 +18,8 @@ COPY tool/config_mariadb.sh /config_mariadb.sh
 COPY conf/init.sql /tmp/init.sql
 COPY conf/my.cnf /etc/mysql
 
-RUN chown -R mysql:mysql /etc/mysql \
-	&& chown mysql:mysql /tmp/
+# RUN chown -R mysql:mysql /etc/mysql \
+# 	&& chown mysql:mysql /tmp/
 
 
 # EXPOSE 3306
