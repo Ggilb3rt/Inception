@@ -20,11 +20,5 @@ RUN apt-get update && apt-get install -y \
 # Adding the sources #
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d/
 COPY tool/config_wp.sh /config_wp.sh
-# ADD srcs/phpMyAdmin-5.0.1-all-languages.tar.gz /var/www
-
-# Config phpMyAdmin
-# RUN mv var/www/phpMyAdmin-5.0.1-all-languages var/www/phpmyadmin \ 
-# 	&& chown -Rfv www-data:www-data /var/www/phpmyadmin \
-# 	&& chown -Rfv www-data:www-data /var/www/wordpress
 
 ENTRYPOINT ["/bin/bash", "/config_wp.sh"]

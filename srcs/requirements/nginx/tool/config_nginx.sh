@@ -65,7 +65,7 @@ chown -R www-data $WP_PATH
 #--------------------#
 # Initialise Nginx   #
 #--------------------#
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 #--------------------#
 # Initialise Openssl #
