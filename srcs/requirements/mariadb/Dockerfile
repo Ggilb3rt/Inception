@@ -18,11 +18,7 @@ COPY tool/config_mariadb.sh /config_mariadb.sh
 COPY conf/init.sql /tmp/init.sql
 COPY conf/my.cnf /etc/mysql
 
-# RUN chown -R mysql:mysql /etc/mysql \
-# 	&& chown mysql:mysql /tmp/
-
-
 # EXPOSE 3306
 USER mysql
 
-ENTRYPOINT ["sh", "/config_mariadb.sh"]
+ENTRYPOINT ["/bin/bash", "/config_mariadb.sh"]
