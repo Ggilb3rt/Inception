@@ -1,7 +1,6 @@
 #!/bin/sh
 
-
-
+# Update init file with .env values
 sed -i 's|MYSQL_DATABASE|'${MYSQL_DATABASE}'|g' /tmp/init.sql
 sed -i 's|MYSQL_USER|'${MYSQL_USER}'|g' /tmp/init.sql
 sed -i 's|MYSQL_PASSWORD|'${MYSQL_PASSWORD}'|g' /tmp/init.sql

@@ -11,7 +11,7 @@ if [ -e "${WP_PATH}/wp-config.php" ]
 then
     echo "Wordpress is already set"
 else
-    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar wp-cli.phar
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod +x wp-cli.phar
     mv wp-cli.phar /usr/local/bin/wp
     wp core download --path=$WP_PATH --allow-root
