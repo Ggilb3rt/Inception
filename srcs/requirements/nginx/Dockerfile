@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y \
     && chown -R www-data /var/lib/nginx \
     && rm -rf /etc/nginx/sites-available/default \
 	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-	&& echo "daemon off;" >> /etc/nginx/nginx.conf
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+	#&& echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Adding the sources #
 # COPY conf/default /etc/nginx/sites-available/default # not used because config_nginx.sh generate it

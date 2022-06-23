@@ -19,6 +19,6 @@ else
 fi
 
 mysqld
-# service mysql start
 # exec "$@"
+# service mysql start
 # systemctl start mariadb.service

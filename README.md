@@ -53,8 +53,10 @@ docker compose prune			// remove all unsued volumes
 
 ## SEARCH
 ### What are Daemons and how they works ?
+Daemon (Disk And Execution MONitor (the name was find after daemon become famous)) is a process or a group of process execute in background, out of a direct user control. On UNIX they are children of init process (PID 1).
 
 ### Why PID 1 in docker is important ?
+le processus init (systemctl) prend le PID 1, si je demare un container avec service xxxx il sera un enfant de init et si ce dernier crash le container sera un programme zombie, il faut donc trouver un autre moyen que service pour lancer les services.
 
 ### php-fpm
 PHP FastCGI Process Manager. The server (Nginx here) pass all valid requests to php-fpm. Php-fpm do the stuff with interpretation and database and send the reponse to the server who send it to the client.
@@ -84,6 +86,9 @@ Best way is to find the pid of the container and kill it like any process (but c
 ps aux | grep container_name
 kill -9 pid
 ```
+
+### WTF ?
+Why don't restart ? cf swarm mode
 
 ## Tests
 Use Pumba
