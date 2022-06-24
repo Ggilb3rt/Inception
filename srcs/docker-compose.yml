@@ -21,7 +21,7 @@ services:
         init: true
         volumes:
             - wordpress_vol:${WP_PATH}
-        restart: always
+        restart: on-failure
         env_file: .env
         networks:
             - inception
@@ -35,10 +35,11 @@ services:
         init: true
         volumes:
             - wordpress_vol:${WP_PATH}
-        deploy:
-            restart_policy:
-                condition: always
-                delay: 3s
+        restart: on-failure
+        # deploy:
+        #     restart_policy:
+        #         condition: always
+        #         delay: 3s
         ports:
             - 443:443	# HOST_PORT:CONTAINER_PORT, use HOST_PORT outside of docker network and CONTAINER_PORT inside
         env_file: .env	#can use specific env file for this container {.env is use by default}

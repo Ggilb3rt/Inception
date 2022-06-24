@@ -31,7 +31,8 @@ docker compose prune			// remove all unsued volumes
 
 ## NGINX
 - [x] ! only starting point is Nginx on port 443
-- [x] use protocole TLSv1.2 or TLSv1.3
+- [x] use protocole TLSv1.2 or TLSv1.3 ```bash
+curl -I -v --tlsv1.2 --tls-max 1.2 https://127.0.0.1/``` #must fail with tlsv1.1 and works with 1.3 ; -I = header infos, -v = verbose
 - [x] ggilbert.42.fr must return localhost website
 
 ## Wordpress + php-fpm
@@ -58,6 +59,8 @@ Daemon (Disk And Execution MONitor (the name was find after daemon become famous
 ### Why PID 1 in docker is important ?
 #### Zombie reaping problem
 [source](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/)
+
+PID 1 must be a proccess that can handel zombies process and orphans
 
 Modern solution in compose : 
 ```yml

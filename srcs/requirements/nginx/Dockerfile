@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y \
 	#&& echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Adding the sources #
-# COPY conf/default /etc/nginx/sites-available/default # not used because config_nginx.sh generate it
 COPY tool/config_nginx.sh /config_nginx.sh
 
 EXPOSE 443

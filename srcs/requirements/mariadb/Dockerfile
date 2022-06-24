@@ -9,16 +9,13 @@ RUN apt-get update && apt-get install -y \
     && mkdir -p /tmp \
     && chown -R mysql:mysql /var/run/mysqld \
     && chown -R mysql:mysql /etc/mysql \
-	&& chown -R mysql:mysql /tmp \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Adding the sources #
 COPY tool/config_mariadb.sh /config_mariadb.sh
-COPY conf/init.sql /tmp/init.sql
-COPY conf/my.cnf /etc/mysql
+COPY ./conf /etc/mysql
 
-# EXPOSE 3306
 USER mysql
 
 ENTRYPOINT ["/bin/bash", "/config_mariadb.sh"]

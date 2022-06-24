@@ -36,7 +36,7 @@ chown -R www-data $WP_PATH
 #--------------------#
 # Initialise Nginx   #
 #--------------------#
--ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 #--------------------#
 # Initialise Openssl #
@@ -53,6 +53,6 @@ EMAIL=${WP_EMAIL}
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ${CERTS_KEY} -out ${CERTS_SELF} \
 	-subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O='$ORGA'/OU='$ORGAUNIT'/CN='$COMMON_NAME'/emailAddress='$EMAIL'"
 
-# service nginx start
+#service nginx start
 nginx -g "daemon off;"
 

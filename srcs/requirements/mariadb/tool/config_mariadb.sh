@@ -1,10 +1,14 @@
 #!/bin/sh
 
+#mkdir -p /etc/mysql
+#chown -R mysql:mysql /etc/mysql
+#mv /tmp/my.cnf /etc/mysql
+
 # Update init file with .env values
-sed -i 's|MYSQL_DATABASE|'${MYSQL_DATABASE}'|g' /tmp/init.sql
-sed -i 's|MYSQL_USER|'${MYSQL_USER}'|g' /tmp/init.sql
-sed -i 's|MYSQL_PASSWORD|'${MYSQL_PASSWORD}'|g' /tmp/init.sql
-sed -i 's|MYSQL_ROOT_PASSWORD|'${MYSQL_ROOT_PASSWORD}'|g' /tmp/init.sql
+sed -i 's|MYSQL_DATABASE|'${MYSQL_DATABASE}'|g' /etc/mysql/init.sql
+sed -i 's|MYSQL_USER|'${MYSQL_USER}'|g' /etc/mysql/init.sql
+sed -i 's|MYSQL_PASSWORD|'${MYSQL_PASSWORD}'|g' /etc/mysql/init.sql
+sed -i 's|MYSQL_ROOT_PASSWORD|'${MYSQL_ROOT_PASSWORD}'|g' /etc/mysql/init.sql
 sed -i 's|MYSQL_PORT|'${MYSQL_PORT}'|g' /etc/mysql/my.cnf
 sed -i 's|MYSQL_ADDRESS|'${MYSQL_ADDRESS}'|g' /etc/mysql/my.cnf
 
@@ -15,7 +19,7 @@ then
     mysqld_safe
 else
     mysql_install_db
-    mysqld --init-file="/tmp/init.sql"
+    mysqld --init-file="/etc/mysql/init.sql"
 fi
 
 mysqld
