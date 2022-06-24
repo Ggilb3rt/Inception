@@ -4,6 +4,7 @@ services:
         build: requirements/mariadb
         image: mariadb
         container_name: MyMariadb
+        init: true
         volumes:
             - mariadb_vol:${MYSQL_PATH}
         restart: on-failure
@@ -17,9 +18,10 @@ services:
         depends_on:
             - mariadb
         container_name: MyWordpress
+        init: true
         volumes:
             - wordpress_vol:${WP_PATH}
-        restart: on-failure
+        restart: always
         env_file: .env
         networks:
             - inception
@@ -30,11 +32,12 @@ services:
         depends_on:
             - wordpress
         container_name: MyNginx
+        init: true
         volumes:
             - wordpress_vol:${WP_PATH}
         deploy:
             restart_policy:
-                condition: on-failure
+                condition: always
                 delay: 3s
         ports:
             - 443:443	# HOST_PORT:CONTAINER_PORT, use HOST_PORT outside of docker network and CONTAINER_PORT inside

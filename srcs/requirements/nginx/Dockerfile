@@ -3,6 +3,7 @@ FROM debian:buster
 # Updates and install #
 RUN apt-get update && apt-get install -y \
 	curl \
+	procps \
 	nginx \
 	openssl \
     && mkdir -p /etc/nginx/ssl \

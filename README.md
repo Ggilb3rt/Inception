@@ -56,7 +56,23 @@ docker compose prune			// remove all unsued volumes
 Daemon (Disk And Execution MONitor (the name was find after daemon become famous)) is a process or a group of process execute in background, out of a direct user control. On UNIX they are children of init process (PID 1).
 
 ### Why PID 1 in docker is important ?
-le processus init (systemctl) prend le PID 1, si je demare un container avec service xxxx il sera un enfant de init et si ce dernier crash le container sera un programme zombie, il faut donc trouver un autre moyen que service pour lancer les services.
+#### Zombie reaping problem
+[source](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/)
+
+Modern solution in compose : 
+```yml
+services:
+  web:
+    image: alpine:latest
+    init: true
+```
+
+
+### Why containers instead of vm ?
+- architecture agnostic (use it with existing applications in any datacenter)
+- written-once, deployed many times (also true with vm but easier with container)
+- leaves no trace and can be added and removed easily
+- use less power
 
 ### php-fpm
 PHP FastCGI Process Manager. The server (Nginx here) pass all valid requests to php-fpm. Php-fpm do the stuff with interpretation and database and send the reponse to the server who send it to the client.
