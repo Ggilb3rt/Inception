@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /etc/nginx/sites-available/default \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-	#&& echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Adding the sources #
 COPY tool/config_nginx.sh /config_nginx.sh

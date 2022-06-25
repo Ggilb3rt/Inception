@@ -1,9 +1,5 @@
 #!/bin/sh
 
-#mkdir -p /etc/mysql
-#chown -R mysql:mysql /etc/mysql
-#mv /tmp/my.cnf /etc/mysql
-
 # Update init file with .env values
 sed -i 's|MYSQL_DATABASE|'${MYSQL_DATABASE}'|g' /etc/mysql/init.sql
 sed -i 's|MYSQL_USER|'${MYSQL_USER}'|g' /etc/mysql/init.sql
@@ -23,6 +19,3 @@ else
 fi
 
 mysqld
-# exec "$@"
-# service mysql start
-# systemctl start mariadb.service
