@@ -94,21 +94,3 @@ DESCRIBE table_name;
 SELECT colon_x, colon_y FROM table_name;
 SELECT * FROM table_name WHERE author_id = 234 LIMIT 5;
 ```
-
-### Ways to force crash
-```bash
-docker stop container_name
-docker kill container_name
-```
-Best way is to find the pid of the container and kill it like any process (but can't do it)
-```bash
-ps aux | grep container_name
-kill -9 pid
-```
-
-### WTF ?
-Why don't restart ? cf swarm mode
-
-## Tests
-Use Pumba
-https://github.com/alexei-led/pumba
